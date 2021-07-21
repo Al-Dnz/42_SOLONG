@@ -1,0 +1,3 @@
+- foe_error when F > 1
+- update mlx
+- Linux version

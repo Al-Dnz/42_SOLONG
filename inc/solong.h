@@ -22,7 +22,27 @@ typedef struct s_pos
 	int	y;
 }			t_pos;
 
-typedef struct	s_state
+typedef struct s_key
+{
+	int	forward;
+	int	back;
+	int	left;
+	int	right;
+}			t_key;
+
+typedef struct s_img
+{
+	void				*mlx_img;
+	int					*addr;
+	char				*addr_c;
+	int					bpp;
+	int					line_len;
+	int					endian;
+	int					width;
+	int					height;
+}			t_img;
+
+typedef struct s_state
 {
 	char	**map;
 	int		map_width;
@@ -57,18 +77,13 @@ void	map_floodfill(t_state *state, int x, int y);
 t_bool	valid_symbol(char **map);
 t_bool	symbol_occurence(char **map, char symbol, int unique);
 int		rectangular_map(char **map);
+void	player_coord(t_state *state);
 
 void	display_map(char **arr);
 void	free_map(char **arr);
 
 void	map_analyzer(t_state *state);
 void	map_diagnostic(t_state *state);
-
-
-
-
-
-
-
+int		map_validation(t_state *state);
 
 #endif

@@ -1,15 +1,14 @@
-
 #include "solong.h"
 
 void	map_floodfill(t_state *state, int x, int y)
 {
 	if (ft_find_index("0CPEF", state->map[y][x]) > -1)
 	{
-		if (ft_find_index("0PEF", state->map[y][x]) > -1)
+		if (ft_find_index("CPEF", state->map[y][x]) > -1)
+			state->map[y][x] = ft_tolower(state->map[y][x]);
+		if (state->map[y][x] == '0')
 			state->map[y][x] = 'x';
-		if (state->map[y][x] == 'C')
-			state->map[y][x] = 'c';
-		if (x - 1 < 0 || y - 1 < 0 || !state->map[y][x + 1] || !state->map[y + 1])
+		if (x < 1 || y < 1 || !state->map[y][x + 1] || !state->map[y + 1])
 		{
 			state->closed_map = false;
 			return ;
@@ -86,22 +85,42 @@ int	rectangular_map(char **map)
 	{
 		i = -1;
 		width = 0;
-		while(map[j][++i])
+		while (map[j][++i])
 		{
-			if (ft_find_index( "01CFEG", map[j][i]) > -1)
-			{
-				if (j == 0)
-					previous_width++;
-				else if (j > 0)
-					width++;
-			}
-			
+			if (j == 0)
+				previous_width++;
+			else if (j > 0)
+				width++;
 		}
-		if (previous_width != width)
-			return (0);
-		previous_width = width;
+		if (j > 0 && previous_width != width)
+			return (false);
+		if (j > 0)
+			previous_width = width;
 		j++;
 	}
-	return (1);
+	return (true);
 }
 
+void	player_coord(t_state *state)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	state->player_coord = (t_pos){0, 0};
+	while (state->map[y])
+	{
+		x = 0;
+		while (state->map[y][x])
+		{
+			if (state->map[y][x] == 'P')
+			{
+				state->player_coord = (t_pos){x, y};
+				state->map[y][x] = '0';
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}

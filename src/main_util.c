@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main_util.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adenhez <adenhez@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 15:45:42 by adenhez           #+#    #+#             */
-/*   Updated: 2021/06/22 23:09:25 by adenhez          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "solong.h"
 
-int		extension_error(char **argv)
+int	extension_error(char **argv)
 {
 	char	**tab;
 	int		i;
@@ -29,7 +17,7 @@ int		extension_error(char **argv)
 	return (output);
 }
 
-int		arg_error(char argc, char **argv)
+int	arg_error(char argc, char **argv)
 {
 	int		fd;
 
@@ -52,4 +40,3 @@ int		arg_error(char argc, char **argv)
 	}
 	return (1);
 }
-
