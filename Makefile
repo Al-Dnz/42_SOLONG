@@ -4,7 +4,10 @@ SRC =	main.c \
 		map_error.c \
 		map_util.c \
 		map_array_generator.c \
-		map_parser.c
+		map_parser.c \
+		graphic_engine.c \
+		draw_util.c \
+		key_handler.c \
 
 NAME = solong
 

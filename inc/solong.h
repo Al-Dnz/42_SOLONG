@@ -6,9 +6,34 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <math.h>
 # include "../libft/libft.h"
+# include <mlx.h>
 
 # include <stdio.h>
+
+# define PI 3.14159265359
+
+# define EXIT		53
+# define ROT_LEFT	123
+# define ROT_RIGHT	124
+# define FORWARD	13
+# define BACK		1
+# define RIGHT		2
+# define LEFT		0
+
+# define MAP_MARGIN 10
+# define GRID_UNIT_SIZE 15
+
+# define HUD_HEIGHT 300
+
+# define BLACK  0x000000
+# define WHITE  0xFFFFFF
+# define GREEN  0x00FF00
+# define RED  0xFF0000
+# define BLUE  0x3333ff
+# define AZUR 0x0ae0f1
+# define VIOLET 0xfa00e4
 
 typedef enum e_bool
 {
@@ -24,10 +49,10 @@ typedef struct s_pos
 
 typedef struct s_key
 {
-	int	forward;
-	int	back;
-	int	left;
-	int	right;
+	t_bool	forward;
+	t_bool	back;
+	t_bool	left;
+	t_bool	right;
 }			t_key;
 
 typedef struct s_img
@@ -44,6 +69,13 @@ typedef struct s_img
 
 typedef struct s_state
 {
+	void	*mlx;
+	void	*win;
+	int		win_width;
+	int		win_height;
+
+	t_img		img;
+
 	char	**map;
 	int		map_width;
 	int		map_height;
@@ -61,9 +93,11 @@ typedef struct s_state
 	t_pos	foe_coord;
 	t_pos	exit_coord;
 
+	t_key	key;
 }				t_state;
 
-void	quit(t_state *state, int error);
+int		quit(t_state *state, int error);
+void	exit_process(t_state *state, int error);
 
 int		extension_error(char **argv);
 int		arg_error(char argc, char **argv);
@@ -85,5 +119,15 @@ void	free_map(char **arr);
 void	map_analyzer(t_state *state);
 void	map_diagnostic(t_state *state);
 int		map_validation(t_state *state);
+
+void	draw_pix(t_img *img, int x, int y, int color);
+void	verline(t_state *state, int x, int y, int size, int color);
+void	draw_square(t_state *state, int x, int y, int size, int color);
+void	draw_square_outline(t_state *state, int x, int y, int size, int color);
+void	draw_map(t_state *state);
+
+
+int keypress(int keycode, t_state *state);
+int keyrelease(int keycode, t_state *state);
 
 #endif
