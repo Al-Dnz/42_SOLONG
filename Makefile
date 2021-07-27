@@ -8,6 +8,10 @@ SRC =	main.c \
 		graphic_engine.c \
 		draw_util.c \
 		key_handler.c \
+		move_util.c \
+		render_util.c \
+		 
+
 
 NAME = solong
 

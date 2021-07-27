@@ -46,30 +46,3 @@ void	draw_square_outline(t_state *state, int x, int y, int size, int color)
 	verline(state, x, y, size, color);
 	verline(state, x + size, y, size, color);
 }
-
-void	draw_map(t_state *state)
-{
-	int	x;
-	int	y;
-	int color;
-	static int color_arr[6] = {BLUE, RED, GREEN, VIOLET, WHITE, BLACK};
-	static char	item[6] = {'P', 'f', 'c', 'e', '1', 'x'};
-
-
-	y = 0;
-	while (state->map[y])
-	{
-		x = 0;
-		while (state->map[y][x])
-		{
-			color = color_arr[ft_find_index(item, state->map[y][x])];
-			draw_square(state, x * GRID_UNIT_SIZE + MAP_MARGIN, y * GRID_UNIT_SIZE + MAP_MARGIN, GRID_UNIT_SIZE, color);
-			draw_square_outline(state, x * GRID_UNIT_SIZE + MAP_MARGIN, y * GRID_UNIT_SIZE + MAP_MARGIN, GRID_UNIT_SIZE, BLACK);
-			x++;
-		}
-		
-		y++;
-	}
-	draw_circle(state, (state->player_coord.x + 0.5) * GRID_UNIT_SIZE + MAP_MARGIN, (state->player_coord.y + 0.5) * GRID_UNIT_SIZE + MAP_MARGIN, GRID_UNIT_SIZE / 4, AZUR);
-
-}

@@ -75,6 +75,7 @@ typedef struct s_state
 	int		win_height;
 
 	t_img		img;
+	t_img		meluch;
 
 	char	**map;
 	int		map_width;
@@ -94,6 +95,8 @@ typedef struct s_state
 	t_pos	exit_coord;
 
 	t_key	key;
+	char	player_dir;
+	int		square_size;
 }				t_state;
 
 int		quit(t_state *state, int error);
@@ -124,10 +127,16 @@ void	draw_pix(t_img *img, int x, int y, int color);
 void	verline(t_state *state, int x, int y, int size, int color);
 void	draw_square(t_state *state, int x, int y, int size, int color);
 void	draw_square_outline(t_state *state, int x, int y, int size, int color);
+void	draw_circle(t_state *state, int x, int y, int size, int color);
+
 void	draw_map(t_state *state);
 
 
 int keypress(int keycode, t_state *state);
 int keyrelease(int keycode, t_state *state);
+
+void	draw_meluch(t_state *state, t_img mel,  int x, int y);
+
+int		move_p(int keycode, t_state *state);
 
 #endif
