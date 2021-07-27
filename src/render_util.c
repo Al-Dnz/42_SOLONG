@@ -8,14 +8,14 @@ void	draw_meluch(t_state *state, t_img mel, int x, int y)
 	int	size;
 
 	size = ft_min(mel.height, mel.width);
-	ratio = size / state->square_size;
+	ratio = (size / state->square_size);
 	j = -1;
 	while (++j < size)
 	{
 		i = -1;
 		while (++i < size)
-			state->img.addr[(y + j / ratio)*state->img.line_len / 4 + (x + i / ratio)]
-				= mel.addr[j * mel.line_len / 4 + i];
+			state->img.addr[(y + j / ratio)*state->img.line_len / 4 + (x + i / ratio)] = mel.addr[j * mel.line_len / 4 + i];
+			//state->img.addr[(y + j / ratio)*state->img.line_len / 4 + (x + i / ratio)] = BLUE;
 	}
 }
 
@@ -40,11 +40,14 @@ void	draw_map(t_state *state)
 				draw_square_outline(state, x * state->square_size + MAP_MARGIN, y * state->square_size + MAP_MARGIN, state->square_size, BLACK);
 			}
 			else
+			{
+				//draw_square(state, x * state->square_size + MAP_MARGIN, y * state->square_size + MAP_MARGIN, state->square_size, WHITE);	
 				draw_meluch(state, state->meluch, x * state->square_size + MAP_MARGIN, y * state->square_size + MAP_MARGIN);
-			
+			}
 			x++;
 		}
 		y++;
 	}
 	draw_circle(state, (state->player_coord.x + 0.5) * state->square_size + MAP_MARGIN, (state->player_coord.y + 0.5) * state->square_size + MAP_MARGIN, state->square_size / 4, AZUR);
+	mlx_put_image_to_window(state->mlx, state->win, state->img.mlx_img, 0, 0);
 }

@@ -40,8 +40,12 @@ void	init_window(t_state *state)
 
 int render_graphic(t_state *state)
 {
-	draw_map(state);
+	//draw_map(state);
 	//mlx_destroy_image(state->mlx, state->img.mlx_img);
+	draw_square(state, 5 * state->square_size + MAP_MARGIN, 3 * state->square_size + MAP_MARGIN, state->square_size, RED);
+	sleep(1);
+	draw_square(state, 5 * state->square_size + MAP_MARGIN, 3 * state->square_size + MAP_MARGIN, state->square_size, VIOLET);
+
 	mlx_put_image_to_window(state->mlx, state->win, state->img.mlx_img, 0, 0);
 	return (1);
 }
@@ -51,7 +55,7 @@ void	process(t_state *state)
 	mlx_hook(state->win, 17, 0, quit, state);
 	mlx_hook(state->win, 2, 1L << 1, &keypress, state);
 	mlx_key_hook(state->win, move_p, state);
-	mlx_loop_hook(state->mlx, &render_graphic, state);
+	//mlx_loop_hook(state->mlx, &render_graphic, state);
 	mlx_loop(state->mlx);
 }
 
