@@ -76,6 +76,13 @@ typedef struct s_state
 
 	t_img		img;
 	t_img		meluch;
+	t_img		wall;
+	t_img		floor;
+	t_img		collectible;
+	t_img		player;
+	t_img		exit;
+	t_img		foe;
+	t_img		praticable;
 
 	char	**map;
 	int		map_width;
@@ -95,6 +102,10 @@ typedef struct s_state
 	t_pos	exit_coord;
 
 	t_key	key;
+
+	int		player_up;
+	int		player_right;
+
 	char	player_dir;
 	int		square_size;
 }				t_state;
@@ -138,5 +149,10 @@ int keyrelease(int keycode, t_state *state);
 void	draw_meluch(t_state *state, t_img mel,  int x, int y);
 
 int		move_p(int keycode, t_state *state);
+
+void	set_parse_flag(t_state *state);
+void	set_dimension(t_state *state);
+void	set_texture(t_state *state);
+void	init_window(t_state *state);
 
 #endif
