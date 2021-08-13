@@ -10,7 +10,8 @@ SRC =	main.c \
 		key_handler.c \
 		move_util.c \
 		render_util.c \
-		initialisation.c
+		initialisation.c \
+		time_handler.c
 		 
 NAME = solong
 

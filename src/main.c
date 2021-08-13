@@ -8,10 +8,12 @@ int render_graphic(t_state *state)
  
 void	process(t_state *state)
 {
+	draw_map(state);
 	mlx_hook(state->win, 17, 0, quit, state);
 	mlx_hook(state->win, 2, 1L << 1, &keypress, state);
 	mlx_key_hook(state->win, move_p, state);
-	mlx_loop_hook(state->mlx, &render_graphic, state);
+	mlx_loop_hook(state->mlx, &period_process, state);
+
 	mlx_loop(state->mlx);
 }
 
@@ -38,7 +40,8 @@ int		main(int argc, char **argv)
 	printf("player : X[%d]Y[%d]\n", state.player_coord.x, state.player_coord.y);
 	set_dimension(&state);
 	init_window(&state);
-	set_texture(&state);
+	
+	set_main_texture(&state);
 	process(&state);
 	return (1);
 }

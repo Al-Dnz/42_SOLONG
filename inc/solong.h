@@ -83,6 +83,10 @@ typedef struct s_state
 	t_img		exit;
 	t_img		foe;
 	t_img		praticable;
+	t_img		win_screen;
+	t_img		gameover_screen;
+	t_img		number_img[10];
+
 
 	char	**map;
 	int		map_width;
@@ -102,12 +106,17 @@ typedef struct s_state
 	t_pos	exit_coord;
 
 	t_key	key;
+	int		key_lock;
 
 	int		player_up;
 	int		player_right;
-
 	char	player_dir;
 	int		square_size;
+	int		score;
+	int		step_n;
+
+	int		timer;
+	int		sprite_period;
 }				t_state;
 
 int		quit(t_state *state, int error);
@@ -152,7 +161,16 @@ int		move_p(int keycode, t_state *state);
 
 void	set_parse_flag(t_state *state);
 void	set_dimension(t_state *state);
-void	set_texture(t_state *state);
+void	set_main_texture(t_state *state);
 void	init_window(t_state *state);
+
+int		adj(int pos, t_state *state);
+void	render_square_pic(t_state *state, t_img img, int x, int y);
+void	render_square_pic_evolved(t_state *state, t_img img, int x, int y);
+void	render_square_pic_rotation(t_state *state, t_img img, int x, int y);
+
+int		period_process(t_state *state);
+int		increment_time(t_state *state);
+
 
 #endif

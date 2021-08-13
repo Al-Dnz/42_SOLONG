@@ -58,6 +58,27 @@ void	render_square_pic_evolved(t_state *state, t_img img, int x, int y)
 	}
 }
 
+void	render_square_sprite(t_state *state, t_img img, int x, int y)
+{
+	int	i;
+	int	j;
+	int	ratio;
+	int	size;
+
+	size = ft_min(img.height, img.width);
+	ratio = (size / state->square_size);
+	j = size;
+	while (--j >= 0)
+	{
+		i = -1;
+		while (++i < size)
+		{
+			if (img.addr[j * img.line_len / 4 + i] > 0)
+				state->img.addr[(y + j / ratio) * state->img.line_len / 4 + (x + i / ratio)] = img.addr[j * img.line_len / 4 + i];
+		}
+	}
+}
+
 
 int	img_coord_adjusted(t_state *state, int i, int j, int size, char mode)
 {
