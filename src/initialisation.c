@@ -28,6 +28,7 @@ void	set_dimension(t_state *state)
 	state->step_n = 0;
 	state->timer = 0;
 	state->sprite_period = 10000;
+	state->sprite_sens = 0;
 	state->key_lock = 0;
 }
 
@@ -45,7 +46,7 @@ void	set_main_texture(t_state *state)
 	state->praticable.mlx_img = mlx_xpm_file_to_image(state->mlx, "./textures/grass_krita2.xpm", &(state->praticable.width), &(state->praticable.height));
 	state->praticable.addr = (int*)mlx_get_data_addr(state->praticable.mlx_img,&(state->praticable.bpp), &(state->praticable.line_len),&(state->praticable.endian));
 
-	state->wall.mlx_img = mlx_xpm_file_to_image(state->mlx, "./textures/bush_cartoon.xpm", &(state->wall.width), &(state->wall.height));
+	state->wall.mlx_img = mlx_xpm_file_to_image(state->mlx, "./textures/rock_cartoon.xpm", &(state->wall.width), &(state->wall.height));
 	state->wall.addr = (int*)mlx_get_data_addr(state->wall.mlx_img,&(state->wall.bpp), &(state->wall.line_len),&(state->wall.endian));
 
 	state->collectible.mlx_img = mlx_xpm_file_to_image(state->mlx, "./textures/carot_cartoon.xpm", &(state->collectible.width), &(state->collectible.height));

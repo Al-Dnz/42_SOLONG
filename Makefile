@@ -11,7 +11,8 @@ SRC =	main.c \
 		move_util.c \
 		render_util.c \
 		initialisation.c \
-		time_handler.c
+		time_handler.c \
+		render_sprites.c
 		 
 NAME = solong
 

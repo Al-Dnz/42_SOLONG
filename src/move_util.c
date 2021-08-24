@@ -7,6 +7,7 @@ void	ending_screen(t_state *state, t_img img, int x, int y)
 	int	ratio;
 	int	size;
 
+	draw_map_end(state);
 	size = ft_max(img.height, img.width);
 	ratio = 1;//(size / state->square_size);
 	j = -1;
@@ -36,14 +37,14 @@ void	special_checking(t_state *state)
 		printf("++++++++=>YOU WIN<=++++++++\n");
 		state->key_lock = 1;
 		ending_screen(state, state->win_screen, 0, 0);
-		mlx_loop_hook(state->mlx, &increment_time, state);
+		mlx_loop_hook(state->mlx, &end_time, state);
 	}
 	if (state->map[y][x] == 'f')
 	{
 		printf("++++++++=>GAME OVER<=++++++++\n");
 		state->key_lock = 1;
 		ending_screen(state, state->gameover_screen, 0, 0);
-		mlx_loop_hook(state->mlx, &increment_time, state);
+		mlx_loop_hook(state->mlx, &end_time, state);
 	}
 }
 

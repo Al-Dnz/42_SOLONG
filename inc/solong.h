@@ -117,6 +117,8 @@ typedef struct s_state
 
 	int		timer;
 	int		sprite_period;
+	int		sprite_sens;
+
 }				t_state;
 
 int		quit(t_state *state, int error);
@@ -150,10 +152,10 @@ void	draw_square_outline(t_state *state, int x, int y, int size, int color);
 void	draw_circle(t_state *state, int x, int y, int size, int color);
 
 void	draw_map(t_state *state);
+void	draw_map_end(t_state *state);
 
-
-int keypress(int keycode, t_state *state);
-int keyrelease(int keycode, t_state *state);
+int 	keypress(int keycode, t_state *state);
+int 	keyrelease(int keycode, t_state *state);
 
 void	draw_meluch(t_state *state, t_img mel,  int x, int y);
 
@@ -170,7 +172,8 @@ void	render_square_pic_evolved(t_state *state, t_img img, int x, int y);
 void	render_square_pic_rotation(t_state *state, t_img img, int x, int y);
 
 int		period_process(t_state *state);
-int		increment_time(t_state *state);
+int		end_time(t_state *state);
 
+void	render_animated_sprite(t_state *state, t_img img, int x, int y);
 
 #endif

@@ -159,7 +159,6 @@ void	draw_map(t_state *state)
 	//static int	color_arr[6] = {BLUE, RED, GREEN, VIOLET, WHITE, BLACK};
 	t_img	img_arr[6] = {state->player, state->foe, state->collectible, state->exit, state->wall, state->praticable};
 	static char	item[6] = {'P', 'f', 'c', 'e', '1', 'x'};
-
 	//mlx_destroy_image(state->mlx, state->img.mlx_img);
 	state->img.mlx_img = mlx_new_image(state->mlx, state->win_width, state->win_height);
 	state->img.addr = (int*)mlx_get_data_addr(state->img.mlx_img, &state->img.bpp, &state->img.line_len, &state->img.endian);
@@ -171,12 +170,45 @@ void	draw_map(t_state *state)
 		{
 			render_square_pic_evolved(state, state->praticable, adj(x, state) ,adj(y ,state));
 			pic = img_arr[ft_find_index(item, state->map[y][x])];
-			render_square_pic_evolved(state, pic, adj(x, state) ,adj(y ,state));
+			if (state->map[y][x] == 'c')
+				render_animated_sprite(state, pic, adj(x, state) ,adj(y ,state));
+			else
+				render_square_pic_evolved(state, pic, adj(x, state) ,adj(y ,state));
 			x++;
 		}
 		y++;
 	}
 	render_square_pic_rotation(state, state->player, adj(state->player_coord.x, state) ,adj(state->player_coord.y ,state));
+	mlx_put_image_to_window(state->mlx, state->win, state->img.mlx_img, 0, 0);
+	//mlx_destroy_image(state->mlx, state->img.mlx_img);
+}
+
+void	draw_map_end(t_state *state)
+{
+	int			x;
+	int			y;
+	t_img 		pic;
+
+	//static int	color_arr[6] = {BLUE, RED, GREEN, VIOLET, WHITE, BLACK};
+	t_img	img_arr[6] = {state->player, state->foe, state->collectible, state->exit, state->wall, state->praticable};
+	static char	item[6] = {'P', 'f', 'c', 'e', '1', 'x'};
+	//mlx_destroy_image(state->mlx, state->img.mlx_img);
+	state->img.mlx_img = mlx_new_image(state->mlx, state->win_width, state->win_height);
+	state->img.addr = (int*)mlx_get_data_addr(state->img.mlx_img, &state->img.bpp, &state->img.line_len, &state->img.endian);
+	y = 0;
+	while (state->map[y])
+	{
+		x = 0;
+		while (state->map[y][x])
+		{
+			render_square_pic_evolved(state, state->praticable, adj(x, state) ,adj(y ,state));
+			pic = img_arr[ft_find_index(item, state->map[y][x])];
+			if (state->map[y][x] == '1' || state->map[y][x] == 'e')
+				render_square_pic_evolved(state, pic, adj(x, state) ,adj(y ,state));
+			x++;
+		}
+		y++;
+	}
 	mlx_put_image_to_window(state->mlx, state->win, state->img.mlx_img, 0, 0);
 	//mlx_destroy_image(state->mlx, state->img.mlx_img);
 }
