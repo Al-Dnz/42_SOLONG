@@ -6,7 +6,12 @@ int		period_process(t_state *state)
 	if (state->timer > state->sprite_period)
 		state->timer = 0;
 	if (state->timer == state->sprite_period / 2 || state->timer == 0)
+	{
+		foe_patrol(state);
 		draw_map(state);
+		special_checking(state);
+	}
+		
 	//printf("[PERIOD][%d]\n", state->timer);
 	return (0);
 }

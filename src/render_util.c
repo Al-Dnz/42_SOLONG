@@ -178,6 +178,7 @@ void	draw_map(t_state *state)
 		}
 		y++;
 	}
+	render_square_pic_evolved(state, state->foe, adj(state->foe_coord.x, state) ,adj(state->foe_coord.y ,state));
 	render_square_pic_rotation(state, state->player, adj(state->player_coord.x, state) ,adj(state->player_coord.y ,state));
 	mlx_put_image_to_window(state->mlx, state->win, state->img.mlx_img, 0, 0);
 	//mlx_destroy_image(state->mlx, state->img.mlx_img);

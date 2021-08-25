@@ -30,6 +30,8 @@ void	set_dimension(t_state *state)
 	state->sprite_period = 10000;
 	state->sprite_sens = 0;
 	state->key_lock = 0;
+
+	foe_coord(state);
 }
 
 void	set_main_texture(t_state *state)

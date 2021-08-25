@@ -12,7 +12,8 @@ SRC =	main.c \
 		render_util.c \
 		initialisation.c \
 		time_handler.c \
-		render_sprites.c
+		render_sprites.c \
+		foe_patrol_handler.c \
 		 
 NAME = solong
 

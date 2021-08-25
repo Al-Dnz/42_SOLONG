@@ -39,7 +39,7 @@ void	special_checking(t_state *state)
 		ending_screen(state, state->win_screen, 0, 0);
 		mlx_loop_hook(state->mlx, &end_time, state);
 	}
-	if (state->map[y][x] == 'f')
+	if (x == state->foe_coord.x && y == state->foe_coord.y)
 	{
 		printf("++++++++=>GAME OVER<=++++++++\n");
 		state->key_lock = 1;

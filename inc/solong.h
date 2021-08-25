@@ -159,6 +159,7 @@ int 	keyrelease(int keycode, t_state *state);
 
 void	draw_meluch(t_state *state, t_img mel,  int x, int y);
 
+void	special_checking(t_state *state);
 int		move_p(int keycode, t_state *state);
 
 void	set_parse_flag(t_state *state);
@@ -175,5 +176,8 @@ int		period_process(t_state *state);
 int		end_time(t_state *state);
 
 void	render_animated_sprite(t_state *state, t_img img, int x, int y);
+
+void	foe_coord(t_state *state);
+void	foe_patrol(t_state *state);
 
 #endif
