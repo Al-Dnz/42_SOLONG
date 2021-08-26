@@ -113,6 +113,7 @@ typedef struct s_state
 	char	player_dir;
 	int		square_size;
 	int		score;
+	char	*str_score;
 	int		step_n;
 
 	int		timer;
@@ -179,5 +180,11 @@ void	render_animated_sprite(t_state *state, t_img img, int x, int y);
 
 void	foe_coord(t_state *state);
 void	foe_patrol(t_state *state);
+
+
+void	update_str_score(t_state *state);
+void	set_number_img(t_state *state);
+void	score_displayer(t_state *state);
+
 
 #endif

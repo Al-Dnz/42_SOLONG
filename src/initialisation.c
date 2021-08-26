@@ -25,6 +25,7 @@ void	set_dimension(t_state *state)
 
 	//state->square_size = (ft_min(state->win_width, state->win_height) - 20) / ft_max(state->map_width, state->map_height);
 	state->score = 0;
+	state->str_score = ft_itoa(state->score);
 	state->step_n = 0;
 	state->timer = 0;
 	state->sprite_period = 10000;
@@ -36,6 +37,8 @@ void	set_dimension(t_state *state)
 
 void	set_main_texture(t_state *state)
 {
+	//state->player.mlx_img = mlx_xpm_file_to_image(state->mlx, "./numbers_txt/1.xpm", &(state->player.width), &(state->player.height));
+
 	state->player.mlx_img = mlx_xpm_file_to_image(state->mlx, "./textures/little_mole_1.xpm", &(state->player.width), &(state->player.height));
 	state->player.addr = (int*)mlx_get_data_addr(state->player.mlx_img,&(state->player.bpp), &(state->player.line_len),&(state->player.endian));
 
@@ -67,23 +70,11 @@ void	set_main_texture(t_state *state)
 	printf("[PLAYER]\n%d\n", state->player.addr[0]);
 	printf("[EXIT]\n%d\n", state->exit.addr[0]);
 	printf("[FLOOR]\n%d\n", state->floor.addr[0]);
+
+	set_number_img(state);
 }
 
-void	set_number_img(t_state *state)
-{
-	static char* arr_path[11] = {"./numbers/zero.xpm", "./number/sone.xpm", "./numbers/two.xpm",
-	"./numbers/three.xpm", "./numbers/four.xpm", "./numbers/five.xpm", "./numbers/six.xpm", "./numbers/seven.xpm",
-	"./numbers/eight.xpm", "./numbers/nine.xpm", NULL};
-	int i;
 
-	i = 0;
-	while (i < 10)
-	{
-		state->number_img[i].mlx_img =  mlx_xpm_file_to_image(state->mlx, arr_path[i], &(state->number_img[i].width), &(state->number_img[i].height));
-		state->number_img[i].addr = (int*)mlx_get_data_addr(state->number_img[i].mlx_img,&(state->number_img[i].bpp), &(state->number_img[i].line_len),&(state->number_img[i].endian));
-		i++;
-	}
-}
 
 void	init_window(t_state *state)
 {

@@ -28,8 +28,10 @@ void	special_checking(t_state *state)
 	y = state->player_coord.y;
 	if (state->map[y][x] == 'c')
 	{
-		state->score++;
 		state->map[y][x] = 'x';
+		draw_map(state);
+		state->score++;
+		update_str_score(state);
 	}
 	if (state->map[y][x] == 'e')
 	{
@@ -100,7 +102,7 @@ int	move_p(int keycode, t_state *state)
 	state->player_coord = (t_pos){x, y};
 	
 	printf("move_p(2) : X[%d]Y[%d] => {%d}\n", state->player_coord.x, state->player_coord.y, keycode);
-	draw_map(state);
+	//draw_map(state);
 	special_checking(state);
 	return (1);
 }

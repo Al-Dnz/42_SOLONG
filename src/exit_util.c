@@ -6,6 +6,7 @@ int	quit(t_state *state, int error)
 
 	fd = 1;
 	free_map(state->map);
+	ft_strclr(&state->str_score);
 	ft_putstr_fd("EXIT\n", fd);
 	exit(error);
 	return (error);
