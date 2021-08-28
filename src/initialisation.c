@@ -11,17 +11,39 @@ void	set_parse_flag(t_state *state)
 	state->rectangular_map = false;
 	state->player_coord = (t_pos){0, 0};
 	state->exit_coord = (t_pos){0, 0};
-	state->foe_coord = (t_pos){0, 0};
+	state->foe_coord = (t_pos){-1, -1};
 }
+
+void	resize_window(t_state *state)
+{
+	int	screen_width;
+	int	screen_height;
+
+	mlx_get_screen_size(state->mlx, &screen_width, &screen_height);
+	printf("<<<RESIZE_WINDOW>>>w[%d]h[%d]\n", state->map_width,state->map_height);
+
+	if (state->map_height >= state->map_width)
+		state->square_size = ((3 * screen_height / 4) - (2 * MAP_MARGIN)) / (state->map_height);
+	else
+		state->square_size = ((3 * screen_width / 4) - (2 * MAP_MARGIN)) / (state->map_width);
+	if (state->square_size > 50)
+			state->square_size = 50;
+	state->win_width = (state->map_width * state->square_size) + (2 * MAP_MARGIN);
+	state->win_height = (state->map_height * state->square_size) + (2 * MAP_MARGIN);
+	
+	printf("<<<SQUARE_SIZE>>>[%d]\n", state->square_size);
+}
+
 
 void	set_dimension(t_state *state)
 {
-	state->win_width = 1000;
-	state->win_height = 1000;
+	//state->win_width = 1000;
+	//state->win_height = 1000;
+	resize_window(state);
 	state->player_dir = 'E';
 	state->player_up = 1;
 	state->player_right = 1;
-	state->square_size = 50;
+	//state->square_size = 50;
 
 	//state->square_size = (ft_min(state->win_width, state->win_height) - 20) / ft_max(state->map_width, state->map_height);
 	state->score = 0;

@@ -33,7 +33,7 @@ int	map_width(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	n = 0;
+	n = -1;
 	max = 0;
 	byte_read = 1;
 	while (byte_read > 0)
@@ -44,7 +44,7 @@ int	map_width(char *path)
 		{
 			if (n > max)
 				max = n;
-			n = 0;
+			n = -1;
 		}
 	}
 	close(fd);
