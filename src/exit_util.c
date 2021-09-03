@@ -5,7 +5,7 @@ void	free_img(t_state *state)
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 10)
 	{
 		if (state->number_img[i].mlx_img)
 			free(state->number_img[i].mlx_img);
