@@ -125,7 +125,6 @@ typedef struct s_state
 }				t_state;
 
 int		quit(t_state *state, int error);
-void	exit_process(t_state *state, int error);
 
 int		extension_error(char **argv);
 int		arg_error(char argc, char **argv);
@@ -187,8 +186,5 @@ void	set_number_img(t_state *state);
 void	score_displayer(t_state *state);
 
 void	ending_screen(t_state *state, t_img img, int x, int y);
-
-void	upgrade_square(t_state *state, int x, int y);
-void	upgrade_map(t_state *state);
 
 #endif
