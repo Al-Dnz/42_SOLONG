@@ -43,7 +43,7 @@ void	draw_map(t_state *state)
 			render_square_pic_evolved(state, state->praticable, adj(x, state),
 				adj(y, state));
 			pic = img_arr[ft_find_index(item, state->map[y][x])];
-			if (state->map[y][x] == 'c')
+			if (state->map[y][x] == 'c' && !state->end_timer)
 				render_animated_sprite(state, pic, adj(x, state),
 					adj(y, state));
 			else
@@ -64,6 +64,7 @@ void	draw_map_end(t_state *state)
 
 	fill_img_arr(state, img_arr);
 	y = -1;
+	pic = state->praticable;
 	while (state->map[++y])
 	{
 		x = -1;

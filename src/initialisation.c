@@ -44,6 +44,7 @@ void	set_game_flag(t_state *state)
 	state->str_score = ft_itoa(state->score);
 	state->step_n = 0;
 	state->timer = 0;
+	state->end_timer = 0;
 	state->sprite_period = 10000;
 	state->sprite_sens = 0;
 	state->key_lock = 0;

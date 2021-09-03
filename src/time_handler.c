@@ -5,7 +5,8 @@ int	period_process(t_state *state)
 	state->timer++;
 	if (state->timer > state->sprite_period)
 		state->timer = 0;
-	if (state->timer == state->sprite_period / 2 || state->timer == 0)
+	if (!state->end_timer
+		&& (state->timer == state->sprite_period / 2 || state->timer == 0))
 	{
 		foe_patrol(state);
 		draw_map(state);
@@ -16,8 +17,8 @@ int	period_process(t_state *state)
 
 int	end_time(t_state *state)
 {
-	state->timer++;
-	if (state->timer > 20000)
+	state->end_timer++;
+	if (state->end_timer > 20000)
 		quit(state, 0);
 	return (0);
 }

@@ -115,6 +115,7 @@ typedef struct s_state
 	int		step_n;
 
 	int		timer;
+	int		end_timer;
 	int		sprite_period;
 	int		sprite_sens;
 
