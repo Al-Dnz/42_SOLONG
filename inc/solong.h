@@ -15,8 +15,12 @@
 # define PI 3.14159265359
 
 # define EXIT		53
-# define ROT_LEFT	123
-# define ROT_RIGHT	124
+
+# define FORW_2		126
+# define BACK_2		125
+# define LEFT_2		123
+# define RIGHT_2	124
+
 # define FORWARD	13
 # define BACK		1
 # define RIGHT		2
@@ -76,7 +80,6 @@ typedef struct s_state
 
 	t_img	img;
 	t_img	wall;
-	t_img	floor;
 	t_img	collectible;
 	t_img	player;
 	t_img	exit;

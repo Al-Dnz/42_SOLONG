@@ -10,6 +10,7 @@ int	quit(t_state *state, int error)
 	free_map(state->map);
 	ft_strclr(&state->str_score);
 	ft_putstr_fd("EXIT\n", fd);
+	ft_putnbr_fd(state->step_n, fd);
 	exit(error);
 	return (error);
 }

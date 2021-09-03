@@ -24,22 +24,25 @@ int	set_delta(int keycode)
 {
 	int	delta;
 
-	if (keycode == FORWARD || keycode == LEFT)
+	delta = 1;
+	if (keycode == FORWARD || keycode == FORW_2
+		|| keycode == LEFT || keycode == LEFT_2)
 		delta = -1;
-	if (keycode == BACK || keycode == RIGHT)
+	if (keycode == BACK || keycode == BACK_2
+		|| keycode == RIGHT || keycode == RIGHT_2)
 		delta = 1;
 	return (delta);
 }
 
 void	set_player_dir(t_state *state, int keycode)
 {
-	if (keycode == FORWARD)
+	if (keycode == FORWARD || keycode == FORW_2)
 		state->player_dir = 'N';
-	else if (keycode == BACK)
+	else if (keycode == BACK || keycode == BACK_2)
 		state->player_dir = 'S';
-	else if (keycode == LEFT)
+	else if (keycode == LEFT || keycode == LEFT_2)
 		state->player_dir = 'E';
-	else if (keycode == RIGHT)
+	else if (keycode == RIGHT || keycode == RIGHT_2)
 		state->player_dir = 'W';
 }
 
@@ -55,12 +58,14 @@ int	move_p(int keycode, t_state *state)
 	x = state->player_coord.x;
 	y = state->player_coord.y;
 	delta = set_delta(keycode);
-	if (keycode == FORWARD || keycode == BACK)
+	if (keycode == FORWARD || keycode == FORW_2
+		|| keycode == BACK || keycode == BACK_2)
 	{
 		set_player_dir(state, keycode);
 		case_1(state, &x, &y, delta);
 	}
-	else if (keycode == LEFT || keycode == RIGHT)
+	else if (keycode == LEFT || keycode == LEFT_2
+		|| keycode == RIGHT || keycode == RIGHT_2)
 	{
 		set_player_dir(state, keycode);
 		case_2(state, &x, &y, delta);
