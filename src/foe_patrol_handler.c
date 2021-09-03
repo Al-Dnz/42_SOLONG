@@ -27,19 +27,19 @@ void	foe_coord(t_state *state)
 void	foe_patrol(t_state *state)
 {
 	static int	sens;
-	int x;
-	int y;
+	int			x;
+	int			y;
 
 	x = state->foe_coord.x;
 	y = state->foe_coord.y;
-	if(sens == 1 && state->map[y][x + 1])
+	if (sens == 1 && state->map[y][x + 1])
 	{
 		if (state->map[y][x + 1] == 'x')
 			state->foe_coord.x += 1;
 		else if (state->map[y][x + 1] == '1')
 			sens = 0;
 	}
-	if(sens == 0 && state->map[y][x - 1])
+	if (sens == 0 && state->map[y][x - 1])
 	{
 		if (state->map[y][x - 1] == 'x')
 			state->foe_coord.x -= 1;

@@ -74,19 +74,17 @@ typedef struct s_state
 	int		win_width;
 	int		win_height;
 
-	t_img		img;
-	t_img		meluch;
-	t_img		wall;
-	t_img		floor;
-	t_img		collectible;
-	t_img		player;
-	t_img		exit;
-	t_img		foe;
-	t_img		praticable;
-	t_img		win_screen;
-	t_img		gameover_screen;
-	t_img		number_img[10];
-
+	t_img	img;
+	t_img	wall;
+	t_img	floor;
+	t_img	collectible;
+	t_img	player;
+	t_img	exit;
+	t_img	foe;
+	t_img	praticable;
+	t_img	win_screen;
+	t_img	gameover_screen;
+	t_img	number_img[10];
 
 	char	**map;
 	int		map_width;
@@ -147,24 +145,23 @@ void	map_diagnostic(t_state *state);
 int		map_validation(t_state *state);
 
 void	draw_pix(t_img *img, int x, int y, int color);
-void	verline(t_state *state, int x, int y, int size, int color);
-void	draw_square(t_state *state, int x, int y, int size, int color);
-void	draw_square_outline(t_state *state, int x, int y, int size, int color);
-void	draw_circle(t_state *state, int x, int y, int size, int color);
+void	verline(t_state *state, t_pos pos, int size, int color);
+void	draw_square(t_state *state, t_pos pos, int size, int color);
+void	draw_square_outline(t_state *state, t_pos pos, int size, int color);
+void	draw_circle(t_state *state, t_pos pos, int size, int color);
 
 void	draw_map(t_state *state);
 void	draw_map_end(t_state *state);
 
-int 	keypress(int keycode, t_state *state);
-int 	keyrelease(int keycode, t_state *state);
-
-void	draw_meluch(t_state *state, t_img mel,  int x, int y);
+int		keypress(int keycode, t_state *state);
+int		keyrelease(int keycode, t_state *state);
 
 void	special_checking(t_state *state);
+
 int		move_p(int keycode, t_state *state);
 
 void	set_parse_flag(t_state *state);
-void	set_dimension(t_state *state);
+void	set_game_flag(t_state *state);
 void	set_main_texture(t_state *state);
 void	init_window(t_state *state);
 
@@ -181,10 +178,13 @@ void	render_animated_sprite(t_state *state, t_img img, int x, int y);
 void	foe_coord(t_state *state);
 void	foe_patrol(t_state *state);
 
-
 void	update_str_score(t_state *state);
 void	set_number_img(t_state *state);
 void	score_displayer(t_state *state);
 
+void	ending_screen(t_state *state, t_img img, int x, int y);
+
+void	upgrade_square(t_state *state, int x, int y);
+void	upgrade_map(t_state *state);
 
 #endif

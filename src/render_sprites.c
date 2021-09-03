@@ -15,7 +15,7 @@ void	render_animated_sprite(t_state *state, t_img img, int x, int y)
 	int	size;
 
 	size = ft_min(img.height, img.width);
-	ratio = (size / state->square_size);
+	ratio = 1.1 * (size / state->square_size);
 	j = size;
 	while (--j >= 0)
 	{
@@ -23,7 +23,9 @@ void	render_animated_sprite(t_state *state, t_img img, int x, int y)
 		while (++i < size)
 		{
 			if (img.addr[j * img.line_len / 4 + i] > 0)
-				state->img.addr[(y + j / ratio) * state->img.line_len / 4 + (x + img_period_adjusted(state, i, size) / ratio)] = img.addr[j * img.line_len / 4 + i];
+				state->img.addr[(y + j / ratio) *state->img.line_len
+					/ 4 + (x + img_period_adjusted(state, i, size) / ratio)]
+					= img.addr[j * img.line_len / 4 + i];
 		}
 	}
 }

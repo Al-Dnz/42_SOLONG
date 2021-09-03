@@ -1,109 +1,71 @@
 #include "solong.h"
 
-void	ending_screen(t_state *state, t_img img, int x, int y)
+void	case_1(t_state *state, int *x, int *y, int delta)
 {
-	int	i;
-	int	j;
-	int	ratio;
-	int	size;
-
-	draw_map_end(state);
-	size = ft_min(state->win_height,state->win_width);
-	ratio = img.width / size;
-	x = (state->win_width - (img.width / ratio)) / 2;
-	y = (state->win_height - (img.height / ratio)) / 2;
-	j = -1;
-	while (++j < img.height)
+	state->player_up = -delta;
+	if (y + delta >= 0 && state->map[*y + delta][*x] != '1')
 	{
-		i = -1;
-		while (++i < img.width)
-			state->img.addr[(y + (j / ratio)) * state->img.line_len / 4 + (x + (i / ratio))] = img.addr[j * img.line_len / 4 + i];
+		*y += delta ;
+		state->step_n++;
+	}	
+}
+
+void	case_2(t_state *state, int *x, int *y, int delta)
+{
+	state->player_right = delta;
+	if (x + delta >= 0 && state->map[*y][*x + delta] != '1')
+	{
+		*x += delta;
+		state->step_n++;
 	}
 }
 
-void	special_checking(t_state *state)
+int	set_delta(int keycode)
 {
-	int	x;
-	int	y;
+	int	delta;
 
-	x = state->player_coord.x;
-	y = state->player_coord.y;
-	if (state->map[y][x] == 'c')
-	{
-		state->map[y][x] = 'x';
-		draw_map(state);
-		state->score++;
-		update_str_score(state);
-	}
-	if (state->map[y][x] == 'e')
-	{
-		printf("++++++++=>YOU WIN<=++++++++\n");
-		state->key_lock = 1;
-		ending_screen(state, state->win_screen, 0, 0);
-		mlx_loop_hook(state->mlx, &end_time, state);
-	}
-	if (x == state->foe_coord.x && y == state->foe_coord.y)
-	{
-		printf("++++++++=>GAME OVER<=++++++++\n");
-		state->key_lock = 1;
-		ending_screen(state, state->gameover_screen, 0, 0);
-		mlx_loop_hook(state->mlx, &end_time, state);
-	}
+	if (keycode == FORWARD || keycode == LEFT)
+		delta = -1;
+	if (keycode == BACK || keycode == RIGHT)
+		delta = 1;
+	return (delta);
+}
+
+void	set_player_dir(t_state *state, int keycode)
+{
+	if (keycode == FORWARD)
+		state->player_dir = 'N';
+	else if (keycode == BACK)
+		state->player_dir = 'S';
+	else if (keycode == LEFT)
+		state->player_dir = 'E';
+	else if (keycode == RIGHT)
+		state->player_dir = 'W';
 }
 
 int	move_p(int keycode, t_state *state)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+	int	delta;
+
+	delta = 0;
 	if (state->key_lock == 1)
 		return (0);
 	x = state->player_coord.x;
 	y = state->player_coord.y;
-	if (keycode == FORWARD)
+	delta = set_delta(keycode);
+	if (keycode == FORWARD || keycode == BACK)
 	{
-		state->player_dir = 'N';
-		state->player_up = 1;
-		if (y - 1 >= 0 && state->map[y - 1][x] != '1')
-		{
-			y -= 1 ;
-			state->step_n++;
-		}		
+		set_player_dir(state, keycode);
+		case_1(state, &x, &y, delta);
 	}
-	else if (keycode == BACK)
+	else if (keycode == LEFT || keycode == RIGHT)
 	{
-		state->player_dir = 'S';
-		state->player_up = -1;
-		if (state->map[y + 1] && state->map[y + 1][x] != '1')
-		{
-			y += 1;
-			state->step_n++;
-		}		
-	}
-	else if (keycode == LEFT)
-	{
-		state->player_dir = 'E';
-		state->player_right = -1;
-		if (x - 1 >= 0 && state->map[y][x - 1] != '1')
-		{
-			x -= 1;
-			state->step_n++;
-		}		
-	}
-	else if (keycode == RIGHT)
-	{
-		state->player_dir = 'W';
-		state->player_right = 1;
-		if (state->map[y][x + 1] && state->map[y][x + 1] != '1')
-		{
-			x += 1;
-			state->step_n++;
-		}		
+		set_player_dir(state, keycode);
+		case_2(state, &x, &y, delta);
 	}
 	state->player_coord = (t_pos){x, y};
-	
-	printf("move_p(2) : X[%d]Y[%d] => {%d}\n", state->player_coord.x, state->player_coord.y, keycode);
-	//draw_map(state);
 	special_checking(state);
 	return (1);
 }

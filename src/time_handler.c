@@ -1,6 +1,6 @@
 #include "solong.h"
 
-int		period_process(t_state *state)
+int	period_process(t_state *state)
 {
 	state->timer++;
 	if (state->timer > state->sprite_period)
@@ -11,12 +11,10 @@ int		period_process(t_state *state)
 		draw_map(state);
 		special_checking(state);
 	}
-		
-	//printf("[PERIOD][%d]\n", state->timer);
 	return (0);
 }
 
-int		end_time(t_state *state)
+int	end_time(t_state *state)
 {
 	state->timer++;
 	if (state->timer > 20000)

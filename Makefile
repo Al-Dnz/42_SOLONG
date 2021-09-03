@@ -15,6 +15,10 @@ SRC =	main.c \
 		render_sprites.c \
 		foe_patrol_handler.c \
 		score_displayer.c \
+		img_initialisation.c \
+		check_case.c \
+		ending_screen.c \
+		draw_map.c \
 		 
 NAME = solong
 
